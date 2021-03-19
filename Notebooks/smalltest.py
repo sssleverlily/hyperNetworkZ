@@ -57,6 +57,7 @@ def Subgraph_centrality(hg: hnx.Hypergraph, node: int):
     for i in range(6):
         sub_centrality = sub_centrality + vecs[node][i] * vecs[node][i] * math.exp(vals[i])
     print(sub_centrality)
+    return sub_centrality
 
 
 '''
@@ -135,13 +136,12 @@ def node_clustering_coefficient(hg: hnx.Hypergraph, node: int):
     # 先找邻接节点
     for i in range(node_num):
         if (adjacency_matrix[node, i]) != 0:
-            print(adjacency_matrix[node, i])
             node_edge_shared = node_edge_shared + adjacency_matrix[node, i]
             node_direct_num = node_direct_num + 1
     node_direct_num = (node_direct_num * (node_direct_num)) / 2
     node_clustering = node_edge_shared / node_direct_num
     print(node_clustering)
-
+    return node_clustering
 
 '''
 节点类型熵
