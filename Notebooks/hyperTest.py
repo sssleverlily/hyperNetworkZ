@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from Notebooks import smalltest
 from Notebooks import middletest
+from Notebooks import largetest
 
 def hyperuse():
     Edges, Names, Weights = pickle.load(open("../Data/GoT.pkl", "rb"))
@@ -14,7 +15,7 @@ def hyperuse():
     for i in range(30):
         smallEdges.append(Edges[i])
     smallHG = hnx.Hypergraph(dict(enumerate(smallEdges)))
-    smalltest.point_intensity_centrality(smallHG, 7)
+    largetest.net_subgraph_centrality(smallHG)
     # smalltest.node_clustering_coefficient(smallHG, 7)
     # edges.element的形式 0: Entity(0,['0', '2'],{})
     #print(HG.edge_adjacency_matrix()) #边的邻接矩阵
