@@ -2,6 +2,8 @@ import hypernetx as hnx
 import math
 from Notebooks import smalltest
 from Notebooks import middletest
+import numpy as np
+import scipy as sp
 
 '''
 超图密度
@@ -47,3 +49,42 @@ def net_subgraph_centrality(hg: hnx.Hypergraph):
         node_centrality = node_centrality + smalltest.Subgraph_centrality(hg, i)
     net_centrality = node_centrality / node_num
     print(net_centrality)
+
+
+'''
+香农熵
+拉普拉斯矩阵 = 度矩阵（对角对称） - 邻接矩阵
+'''
+
+
+def shannon_entropy(hg: hnx.Hypergraph):
+    matrix = hg.adjacency_matrix().todense()
+    node_num = matrix.shape[0]
+    degree_matrix = np.zeros(shape=(node_num, node_num))
+    # 首先要求度矩阵
+    for i in range(node_num):
+        degree_matrix[i - 1, i - 1] = smalltest.hyperdegree(hg, i)
+    # 创建拉普拉斯矩阵
+    laplace_matrix = degree_matrix - matrix
+    vals, vecs = sp.sparse.linalg.eigs(laplace_matrix)  # val特征值，vecs特征向量
+    vals_sum = 0
+    for i in range(len(vals)):
+        vals_sum = vals_sum + math.fabs(vals[i]) * math.log2(math.fabs(vals[i]))
+    print(-1 * vals_sum)
+
+
+'''
+网络效率
+'''
+
+
+def hyperNet_efficiency(hg: hnx.Hypergraph):
+    # 暂缓，没想好节点之间的拓扑距离怎么算
+    return
+
+
+'''
+网络的自然连通度
+'''
+def hyperNet_natural_connectivity(hg: hnx.Hypergraph):
+    return

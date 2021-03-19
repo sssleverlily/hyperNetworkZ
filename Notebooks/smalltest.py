@@ -21,7 +21,8 @@ def adjacency_matrix(hg: hnx.Hypergraph):
 def hyperdegree(hg: hnx.Hypergraph, node: int):
     node_list = list(hg.nodes.elements.keys())  # 获得超图节点列表
     node_degree = hg.degree(node_list[node])
-    print(node_degree)
+    # print(node_degree)
+    return node_degree
 
 
 '''
