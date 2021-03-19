@@ -87,4 +87,11 @@ def hyperNet_efficiency(hg: hnx.Hypergraph):
 网络的自然连通度
 '''
 def hyperNet_natural_connectivity(hg: hnx.Hypergraph):
-    return
+    matrix = hg.adjacency_matrix().asfptype()  # 上投矩阵以浮动或翻倍
+    node_num = matrix.shape[0]
+    vals, vecs = sp.sparse.linalg.eigs(matrix)  # val特征值，vecs特征向量
+    sum = 0
+    for i in range(len(vals)):
+        sum = sum + math.exp(vals[i-1])
+    natural_connectivity = math.log(sum/node_num,math.e)
+    print(natural_connectivity)
