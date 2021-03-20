@@ -130,19 +130,64 @@ def subgraph_centripetality(hg: hnx.Hypergraph):
 第i类节点在整个网络类型节点中占据的比例pi
 '''
 
+
 def classification_entropy(hg: hnx.Hypergraph):
     matrix = hg.adjacency_matrix().todense()
     node_num = matrix.shape[0]
     node_type_list = []
     node_type_classification = 0
-    #寻找第i类节点（这里以度为例子）
+    # 寻找第i类节点（这里以度为例子）
     for i in range(node_num):
         node_type = 0
         for j in range(node_num):
             if smalltest.hyperdegree(hg, j) == i:
                 node_type = node_type + 1
-        node_type_list.append(node_type/node_num)
+        node_type_list.append(node_type / node_num)
     for k in range(node_num):
         if node_type_list[k] != 0:
-            node_type_classification = node_type_classification + (-1) * node_type_list[k]*math.log2(node_type_list[k])
-    print(node_type_classification)
+            node_type_classification = node_type_classification + (-1) * node_type_list[k] * math.log2(
+                node_type_list[k])
+    return node_type_classification
+
+
+'''
+模体熵
+pi代表了第i类节点在整个网络节点数种占的比例
+hi^n(j)第i类节点为模核的n(j)-模体熵
+'''
+
+
+def hypernet_motif_entropy(hg: hnx.Hypergraph):
+    # 先求pi好了
+    matrix = hg.adjacency_matrix().todense()
+    node_num = matrix.shape[0]
+    node_type_list = []
+    p_i = 0
+    for i in range(node_num):
+        node_type = 0
+        for j in range(node_num):
+            if smalltest.hyperdegree(hg, j) == i:
+                node_type = node_type + 1
+        node_type_list.append(node_type / node_num)  # pi的列表
+    for k in range(len(node_type_list)):
+        p_i = p_i + node_type_list[k]
+    print(p_i)
+    # n-模体熵
+    return
+
+
+'''
+超网络的中心度
+'''
+
+
+def hyperNet_centrality(hg: hnx.Hypergraph):
+    matrix = hg.adjacency_matrix().todense()
+    node_num = matrix.shape[0]
+    centrality_list = []
+    centrality_sum = 0
+    for i in range(node_num):
+        centrality_list.append(smalltest.Subgraph_centrality(hg, i))
+    for j in range(node_num):
+        centrality_sum = centrality_sum + (max(centrality_list) - centrality_list[j])
+    print(centrality_sum / (node_num - 2))
