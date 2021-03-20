@@ -15,7 +15,7 @@ def hyperuse():
     for i in range(30):
         smallEdges.append(Edges[i])
     smallHG = hnx.Hypergraph(dict(enumerate(smallEdges)))
-    largetest.hyperNet_natural_connectivity(smallHG)
+    largetest.classification_entropy(smallHG)
     # smalltest.node_clustering_coefficient(smallHG, 7)
     # edges.element的形式 0: Entity(0,['0', '2'],{})
     #print(HG.edge_adjacency_matrix()) #边的邻接矩阵

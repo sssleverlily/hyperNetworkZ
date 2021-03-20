@@ -86,12 +86,63 @@ def hyperNet_efficiency(hg: hnx.Hypergraph):
 '''
 网络的自然连通度
 '''
+
+
 def hyperNet_natural_connectivity(hg: hnx.Hypergraph):
     matrix = hg.adjacency_matrix().asfptype()  # 上投矩阵以浮动或翻倍
     node_num = matrix.shape[0]
     vals, vecs = sp.sparse.linalg.eigs(matrix)  # val特征值，vecs特征向量
     sum = 0
     for i in range(len(vals)):
-        sum = sum + math.exp(vals[i-1])
-    natural_connectivity = math.log(sum/node_num,math.e)
+        sum = sum + math.exp(vals[i - 1])
+    natural_connectivity = math.log(sum / node_num, math.e)
     print(natural_connectivity)
+
+
+'''
+空间中心性
+程度中心性  中间中心性 特征向量中心性
+平方相加再开根号
+'''
+
+
+def spatial_centrality(hg: hnx.Hypergraph):
+    return
+
+
+'''
+子图向心性
+A = UDU(T) 其中A是邻接矩阵
+平均子图向心性就再除节点数
+'''
+
+
+def subgraph_centripetality(hg: hnx.Hypergraph):
+    adjacency_matrix = hg.adjacency_matrix().todense()
+    matrix = hg.adjacency_matrix().asfptype()  # 上投矩阵以浮动或翻倍
+    node_num = matrix.shape[0]
+    vals, vecs = sp.sparse.linalg.eigs(matrix)  # val特征值，vecs特征向量
+    return
+
+
+'''
+网络的节点分类熵
+第i类节点在整个网络类型节点中占据的比例pi
+'''
+
+def classification_entropy(hg: hnx.Hypergraph):
+    matrix = hg.adjacency_matrix().todense()
+    node_num = matrix.shape[0]
+    node_type_list = []
+    node_type_classification = 0
+    #寻找第i类节点（这里以度为例子）
+    for i in range(node_num):
+        node_type = 0
+        for j in range(node_num):
+            if smalltest.hyperdegree(hg, j) == i:
+                node_type = node_type + 1
+        node_type_list.append(node_type/node_num)
+    for k in range(node_num):
+        if node_type_list[k] != 0:
+            node_type_classification = node_type_classification + (-1) * node_type_list[k]*math.log2(node_type_list[k])
+    print(node_type_classification)
