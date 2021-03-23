@@ -52,6 +52,29 @@ def net_subgraph_centrality(hg: hnx.Hypergraph):
 
 
 '''
+平均最短路径
+最短路径可以分为两种情况讨论：超边内任意两点间的最短路径为1，另外，不在同一条超边内的任意两个点间最多可以通过两条超边相连通，所以不在同一条超边内的任意两点间的最短的路径为2。
+'''
+
+
+def average_shortest_path(hg: hnx.Hypergraph):
+    matrix = hg.adjacency_matrix().todense()
+    node_num = matrix.shape[0]
+    shortest_path_num = 0
+    for i in range(node_num):
+        for j in range(node_num):
+            if j != i:
+                if matrix[i, j] != 0:
+                    shortest_path_num = shortest_path_num + 1
+                else:
+                    shortest_path_num = shortest_path_num + 2
+
+    average_shortest_path = (2 * shortest_path_num / 2) / (
+                node_num * (node_num - 1))  # shortest_path_num除2的原因是i到j和j到i算了两遍
+    print(average_shortest_path)
+
+
+'''
 香农熵
 拉普拉斯矩阵 = 度矩阵（对角对称） - 邻接矩阵
 '''
@@ -75,12 +98,23 @@ def shannon_entropy(hg: hnx.Hypergraph):
 
 '''
 网络效率
+最短路径可以分为两种情况讨论：超边内任意两点间的最短路径为1，另外，不在同一条超边内的任意两个点间最多可以通过两条超边相连通，所以不在同一条超边内的任意两点间的最短的路径为2。
 '''
 
 
 def hyperNet_efficiency(hg: hnx.Hypergraph):
-    # 暂缓，没想好节点之间的拓扑距离怎么算
-    return
+    matrix = hg.adjacency_matrix().todense()
+    node_num = matrix.shape[0]
+    shortest_path_num = 0
+    for i in range(node_num):
+        for j in range(node_num):
+            if j != i:
+                if matrix[i, j] != 0:
+                    shortest_path_num = shortest_path_num + 1
+                else:
+                    shortest_path_num = shortest_path_num + 1/2
+    hyperNet_efficiency = (shortest_path_num/2) / (node_num * (node_num - 1))
+    print(hyperNet_efficiency)
 
 
 '''
