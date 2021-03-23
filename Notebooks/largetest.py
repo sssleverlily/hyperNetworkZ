@@ -4,6 +4,7 @@ from Notebooks import smalltest
 from Notebooks import middletest
 import numpy as np
 import scipy as sp
+from Notebooks import shortest_road
 
 '''
 超图密度
@@ -67,7 +68,7 @@ def average_shortest_path(hg: hnx.Hypergraph):
                 if matrix[i, j] != 0:
                     shortest_path_num = shortest_path_num + 1
                 else:
-                    shortest_path_num = shortest_path_num + 2
+                    shortest_path_num = shortest_path_num + shortest_road.shortest(hg, i, j)
 
     average_shortest_path = (2 * shortest_path_num / 2) / (
                 node_num * (node_num - 1))  # shortest_path_num除2的原因是i到j和j到i算了两遍
@@ -98,7 +99,7 @@ def shannon_entropy(hg: hnx.Hypergraph):
 
 '''
 网络效率
-最短路径可以分为两种情况讨论：超边内任意两点间的最短路径为1，另外，不在同一条超边内的任意两个点间最多可以通过两条超边相连通，所以不在同一条超边内的任意两点间的最短的路径为2。
+最短路径可以分为两种情况讨论：超边内任意两点间的最短路径为1
 '''
 
 
@@ -111,8 +112,10 @@ def hyperNet_efficiency(hg: hnx.Hypergraph):
             if j != i:
                 if matrix[i, j] != 0:
                     shortest_path_num = shortest_path_num + 1
+                elif shortest_road.shortest(hg, i, j) == 0:
+                    shortest_path_num = shortest_path_num
                 else:
-                    shortest_path_num = shortest_path_num + 1/2
+                    shortest_path_num = shortest_path_num + 1/shortest_road.shortest(hg, i, j)
     hyperNet_efficiency = (shortest_path_num/2) / (node_num * (node_num - 1))
     print(hyperNet_efficiency)
 

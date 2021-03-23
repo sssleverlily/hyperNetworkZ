@@ -7,6 +7,7 @@ import numpy as np
 from Notebooks import smalltest
 from Notebooks import middletest
 from Notebooks import largetest
+from Notebooks import shortest_road
 
 def hyperuse():
     Edges, Names, Weights = pickle.load(open("../Data/GoT.pkl", "rb"))
