@@ -1,5 +1,6 @@
 # 超度，节点的超度分布，节点的子图中心度，度中心性，点强度
 import hypernetx as hnx
+import networkx as nx
 import numpy as np
 from scipy.sparse import csr_matrix
 import scipy as sp
@@ -144,6 +145,7 @@ def node_clustering_coefficient(hg: hnx.Hypergraph, node: int):
     print(node_clustering)
     return node_clustering
 
+
 '''
 节点类型熵
 '''
@@ -220,3 +222,48 @@ def point_intensity_centrality(hg: hnx.Hypergraph, node: int):
         # if node_matrix[node, i] != 0: 其实判不判断是邻接节点没必要，反正是+0
         node_strength = node_strength + node_matrix[node, i]
     print(node_strength)
+
+
+'''
+节点的介数中心性
+'''
+
+
+def node_betweenness_centrality(hg: hnx.Hypergraph, node: int, s=1, normalized=True):
+    A, coldict = hg.adjacency_matrix(index=True)
+    # A, coldict = hg.edge_adjacency_matrix(s=s, index=True)
+    A.setdiag(0)
+    A = (A >= s) * 1
+    g = nx.from_scipy_sparse_matrix(A)
+    dict = nx.betweenness_centrality(g, normalized=normalized)
+    # print(dict.get(node - 1))
+    return dict.get(node - 1)
+
+
+'''
+节点重要性
+a,b,c 是调节参数，只要满足a+b+c=1即可
+'''
+
+
+def node_importance(hg: hnx.Hypergraph, node: int, a: int, b: int, c: int):
+    if a+b+c != 1:
+        print("输入参数错误")
+    else:
+        node_matrix = hg.adjacency_matrix().todense()
+        node_num = node_matrix.shape[0]
+        edge_matrix = hg.incidence_matrix().todense()
+        edge_num = edge_matrix.shape[0]
+        print(edge_matrix.shape)
+        node_degree = 0
+        node_star = 0
+        for i in range(node_num):
+            if node_matrix[node, i] != 0:
+                node_degree = node_degree + 1
+        for i in range(edge_num):
+            if edge_matrix[i, node] != 0:
+                node_star = node_star + 1
+        node_betweenness = node_betweenness_centrality(hg, node)
+        node_importance = a * node_degree + b * node_star + c * node_betweenness
+        print(node_importance)
+    return

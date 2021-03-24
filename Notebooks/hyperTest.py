@@ -9,6 +9,7 @@ from Notebooks import middletest
 from Notebooks import largetest
 from Notebooks import shortest_road
 
+
 def hyperuse():
     Edges, Names, Weights = pickle.load(open("../Data/GoT.pkl", "rb"))
     # HG = hnx.Hypergraph(dict(enumerate(Edges)))  198node,1400+edges
@@ -16,23 +17,22 @@ def hyperuse():
     for i in range(30):
         smallEdges.append(Edges[i])
     smallHG = hnx.Hypergraph(dict(enumerate(smallEdges)))
-    largetest.hyperNet_efficiency(smallHG)
-    # smalltest.node_clustering_coefficient(smallHG, 7)
+    # largetest.hyperNet_efficiency(smallHG)
+    smalltest.node_importance(smallHG, 7, 0, 0, 1)
     # edges.element的形式 0: Entity(0,['0', '2'],{})
-    #print(HG.edge_adjacency_matrix()) #边的邻接矩阵
+    # print(HG.edge_adjacency_matrix()) #边的邻接矩阵
     # print(HG.degree(str(HG.edges.elements.get(0).uid)))
     # print(HG.degree('0'))
 
-#198node 1491edge
-    # hnx.draw(HG)
-    # plt.show()
-    # g = nx.karate_club_graph()
 
-def hypertest(H:hnx.Hypergraph):
+# 198node 1491edge
+# hnx.draw(HG)
+# plt.show()
+# g = nx.karate_club_graph()
+
+def hypertest(H: hnx.Hypergraph):
     smalltest.hyperdegree(H)
 
 
 if __name__ == '__main__':
     hyperuse()
-
-
