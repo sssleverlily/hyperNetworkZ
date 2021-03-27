@@ -8,6 +8,7 @@ from Notebooks import smalltest
 from Notebooks import middletest
 from Notebooks import largetest
 from Notebooks import shortest_road
+from Notebooks import hyperdraw
 
 
 def hyperuse():
@@ -17,8 +18,9 @@ def hyperuse():
     for i in range(30):
         smallEdges.append(Edges[i])
     smallHG = hnx.Hypergraph(dict(enumerate(smallEdges)))
+    hyperdraw.draw_node_degree(smallHG)
     # largetest.hyperNet_efficiency(smallHG)
-    smalltest.node_importance(smallHG, 7, 0, 0, 1)
+    # print(smalltest.hyperdegree(smallHG, 2))
     # edges.element的形式 0: Entity(0,['0', '2'],{})
     # print(HG.edge_adjacency_matrix()) #边的邻接矩阵
     # print(HG.degree(str(HG.edges.elements.get(0).uid)))

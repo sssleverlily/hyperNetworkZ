@@ -41,7 +41,7 @@ def hyperdistribution(hg: hnx.Hypergraph, node_degree_is_k: int):
         if hg.degree(node_list[i]) == node_degree_is_k:
             nodes_Sum = nodes_Sum + 1
     distribution = nodes_Sum / nodes_Num
-    print(distribution)
+    return distribution
 
 
 '''
@@ -57,7 +57,6 @@ def Subgraph_centrality(hg: hnx.Hypergraph, node: int):
     sub_centrality = 0
     for i in range(6):
         sub_centrality = sub_centrality + vecs[node][i] * vecs[node][i] * math.exp(vals[i])
-    print(sub_centrality)
     return sub_centrality
 
 
@@ -77,7 +76,7 @@ def degree_centrality(hg: hnx.Hypergraph, node: int):
         if matrix[node, i] != 0:
             direct_node_sum = direct_node_sum + 1
     degree_centrality = direct_node_sum / (nodes_Num - 1)
-    print(degree_centrality)
+    return degree_centrality
 
 
 '''
@@ -97,7 +96,7 @@ def hypernode_strength(hg: hnx.Hypergraph, node: int):
         for i in range(edge_num):
             if matrix[node, i] == 1 and matrix[j, i] == 1:
                 node_strength = node_strength + 1
-    print(node_strength)
+    return node_strength
 
 
 '''
@@ -118,7 +117,7 @@ def cosine_degree(hg: hnx.Hypergraph, node: int):
             degree_num = degree_num + hg.degree(str(node))
             direct_node_sum = direct_node_sum + 1
     cos_degree = degree_num / direct_node_sum
-    print(cos_degree)
+    return cos_degree
 
 
 '''
@@ -141,7 +140,6 @@ def node_clustering_coefficient(hg: hnx.Hypergraph, node: int):
             node_direct_num = node_direct_num + 1
     node_direct_num = (node_direct_num * (node_direct_num)) / 2
     node_clustering = node_edge_shared / node_direct_num
-    print(node_clustering)
     return node_clustering
 
 
@@ -162,7 +160,7 @@ def node_type_entropy(hg: hnx.Hypergraph):
         p_i = n_i / list_size
         if p_i != 0:
             nte = nte + -1 * p_i * math.log(p_i, math.e)
-    print(nte)
+    return nte
 
 
 '''
@@ -201,7 +199,7 @@ def type_assortativity_coefficient(hg: hnx.Hypergraph):
     a_pp = a_pp + a_p * a_p
 
     tac = (n_pp - a_pp) / (1 - a_pp)
-    print(tac)
+    return tac
 
 
 '''
@@ -220,7 +218,7 @@ def point_intensity_centrality(hg: hnx.Hypergraph, node: int):
     for i in range(node_size):
         # if node_matrix[node, i] != 0: 其实判不判断是邻接节点没必要，反正是+0
         node_strength = node_strength + node_matrix[node, i]
-    print(node_strength)
+    return node_strength
 
 
 '''
@@ -248,6 +246,7 @@ a,b,c 是调节参数，只要满足a+b+c=1即可
 def node_importance(hg: hnx.Hypergraph, node: int, a: int, b: int, c: int):
     if a+b+c != 1:
         print("输入参数错误")
+        return 0
     else:
         node_matrix = hg.adjacency_matrix().todense()
         node_num = node_matrix.shape[0]
@@ -264,5 +263,4 @@ def node_importance(hg: hnx.Hypergraph, node: int, a: int, b: int, c: int):
                 node_star = node_star + 1
         node_betweenness = node_betweenness_centrality(hg, node)
         node_importance = a * node_degree + b * node_star + c * node_betweenness
-        print(node_importance)
-    return
+        return node_importance
