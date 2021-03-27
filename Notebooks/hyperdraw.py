@@ -2,10 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from Notebooks import smalltest
 import hypernetx as hnx
-import seaborn as sns
-
-# import warnings
-# warnings.filterwarnings("ignore")
 
 '''
 测试能不能画统计图
