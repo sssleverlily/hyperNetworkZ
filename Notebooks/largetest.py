@@ -17,7 +17,7 @@ def hypergraph_density(hg: hnx.Hypergraph):
     node_num = matrix.shape[0]
     edge_num = matrix.shape[1]
     density = edge_num / (math.pow(2, node_num) - 1)
-    print(density)
+    return density
 
 
 '''
@@ -33,7 +33,7 @@ def net_clustering_coefficient(hg: hnx.Hypergraph):
     for i in range(node_num):
         node_clustering = node_clustering + smalltest.node_clustering_coefficient(hg, i)
     net_clustering = node_clustering / node_num
-    print(net_clustering)
+    return net_clustering
 
 
 '''
@@ -49,7 +49,7 @@ def net_subgraph_centrality(hg: hnx.Hypergraph):
     for i in range(node_num):
         node_centrality = node_centrality + smalltest.Subgraph_centrality(hg, i)
     net_centrality = node_centrality / node_num
-    print(net_centrality)
+    return net_centrality
 
 
 '''
@@ -72,7 +72,7 @@ def average_shortest_path(hg: hnx.Hypergraph):
 
     average_shortest_path = (2 * shortest_path_num / 2) / (
                 node_num * (node_num - 1))  # shortest_path_num除2的原因是i到j和j到i算了两遍
-    print(average_shortest_path)
+    return average_shortest_path
 
 
 '''
@@ -94,7 +94,7 @@ def shannon_entropy(hg: hnx.Hypergraph):
     vals_sum = 0
     for i in range(len(vals)):
         vals_sum = vals_sum + math.fabs(vals[i]) * math.log2(math.fabs(vals[i]))
-    print(-1 * vals_sum)
+    return -1 * vals_sum
 
 
 '''
@@ -117,7 +117,7 @@ def hyperNet_efficiency(hg: hnx.Hypergraph):
                 else:
                     shortest_path_num = shortest_path_num + 1/shortest_road.shortest(hg, i, j)
     hyperNet_efficiency = (shortest_path_num/2) / (node_num * (node_num - 1))
-    print(hyperNet_efficiency)
+    return hyperNet_efficiency
 
 
 '''
@@ -133,7 +133,7 @@ def hyperNet_natural_connectivity(hg: hnx.Hypergraph):
     for i in range(len(vals)):
         sum = sum + math.exp(vals[i - 1])
     natural_connectivity = math.log(sum / node_num, math.e)
-    print(natural_connectivity)
+    return natural_connectivity
 
 
 '''
@@ -227,4 +227,5 @@ def hyperNet_centrality(hg: hnx.Hypergraph):
         centrality_list.append(smalltest.Subgraph_centrality(hg, i))
     for j in range(node_num):
         centrality_sum = centrality_sum + (max(centrality_list) - centrality_list[j])
-    print(centrality_sum / (node_num - 2))
+    centrality = centrality_sum / (node_num - 2)
+    return centrality

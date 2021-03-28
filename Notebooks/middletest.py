@@ -17,7 +17,7 @@ def hyperedge_degree(hg: hnx.Hypergraph, edge: int):
     edge_degree = 0
     for i in range(size):
         edge_degree = edge_degree + matrix[i, edge]
-    print(edge_degree)
+    return edge_degree
 
 
 # 边k的超图分布就是 度为K的边占整个网络节点数的比例
@@ -28,7 +28,7 @@ def hyperdistribution(hg: hnx.Hypergraph, edge_degree_is_k: int):
         if hg.degree(str(hg.edges.elements.get(i).uid)) == edge_degree_is_k:
             edge_Sum = edge_Sum + 1
     distribution = edge_Sum / edges_Num
-    print(distribution)
+    return distribution
 
 
 '''
@@ -38,7 +38,7 @@ def hyperdistribution(hg: hnx.Hypergraph, edge_degree_is_k: int):
 
 def topological_distance(hg: hnx.Hypergraph, edge_i: int, edge_j: int):
     matrix = hg.adjacency_matrix().todense()
-    print(matrix[edge_i, edge_j])
+    return matrix[edge_i, edge_j]
 
 
 '''
@@ -54,7 +54,7 @@ def hyperedge_cardinality(hg: hnx.Hypergraph, edge: int):
     for i in range(node_num):
         if matrix[i, edge] != 0:
             node_in_edge_num = node_in_edge_num + 1
-    print(node_in_edge_num)
+    return node_in_edge_num
 
 
 '''
@@ -71,7 +71,7 @@ def hyperedge_strength(hg: hnx.Hypergraph, edge_i: int):
     node_num = 0
     for j in range(size):
         node_num = node_num + matrix[edge_i, j]
-    print(node_num)
+    return node_num
 
 
 '''
@@ -93,4 +93,4 @@ def hyperedge_density(hg: hnx.Hypergraph, edge: int):
     node_min = min(node_list)
     node = node_list[edge - 1]  # 因为第1个点是node_list[0]
     hyperedge_density = (node_max - node) / (node_max - node_min)
-    print(hyperedge_density)
+    return hyperedge_density
