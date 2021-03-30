@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from Notebooks import smalltest
+from Notebooks import micro_statistics
 import hypernetx as hnx
 
 '''
@@ -17,16 +17,16 @@ def small_draw(hg: hnx.Hypergraph, node: int):
     # x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
     statistic_value = []
     # 添加
-    statistic_value.append(smalltest.hyperdegree(hg, node).real)
-    statistic_value.append(smalltest.hyperdistribution(hg, node).real)
-    statistic_value.append(smalltest.Subgraph_centrality(hg, node).real)
-    statistic_value.append(smalltest.degree_centrality(hg, node).real)
-    statistic_value.append(smalltest.hypernode_strength(hg, node).real)
-    statistic_value.append(smalltest.cosine_degree(hg, node).real)
-    statistic_value.append(smalltest.node_clustering_coefficient(hg, node).real)
-    statistic_value.append(smalltest.node_type_entropy(hg).real)
-    statistic_value.append(smalltest.type_assortativity_coefficient(hg).real)
-    statistic_value.append(smalltest.point_intensity_centrality(hg, node).real)
+    statistic_value.append(micro_statistics.hyperdegree(hg, node).real)
+    statistic_value.append(micro_statistics.hyperdistribution(hg, node).real)
+    statistic_value.append(micro_statistics.Subgraph_centrality(hg, node).real)
+    statistic_value.append(micro_statistics.degree_centrality(hg, node).real)
+    statistic_value.append(micro_statistics.hypernode_strength(hg, node).real)
+    statistic_value.append(micro_statistics.cosine_degree(hg, node).real)
+    statistic_value.append(micro_statistics.node_clustering_coefficient(hg, node).real)
+    statistic_value.append(micro_statistics.node_type_entropy(hg).real)
+    statistic_value.append(micro_statistics.type_assortativity_coefficient(hg).real)
+    statistic_value.append(micro_statistics.point_intensity_centrality(hg, node).real)
     # statistic_value.append(smalltest.node_betweenness_centrality(hg, node))
     # statistic_value.append(smalltest.node_importance(hg, node, 1, 0, 0))
     labels = []
@@ -79,7 +79,7 @@ def draw_node_degree(hg: hnx.Hypergraph):
     labels = []
     for i in range(length):
         # 添加
-        statistic_value.append(smalltest.hyperdegree(hg, i).real)
+        statistic_value.append(micro_statistics.hyperdegree(hg, i).real)
     # labels = ['G1', 'G2', 'G3', 'G4', 'G5']
     value_len = len(statistic_value)
     for i in range(value_len):

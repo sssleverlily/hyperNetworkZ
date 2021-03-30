@@ -9,8 +9,8 @@ from typing import List
 
 import hypernetx as hnx
 import math
-from Notebooks import smalltest
-from Notebooks import middletest
+from Notebooks import micro_statistics
+from Notebooks import meso_statistics
 import numpy as np
 import scipy as sp
 

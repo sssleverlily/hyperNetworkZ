@@ -1,7 +1,7 @@
 import hypernetx as hnx
 import math
-from Notebooks import smalltest
-from Notebooks import middletest
+from Notebooks import micro_statistics
+from Notebooks import meso_statistics
 import numpy as np
 import scipy as sp
 from Notebooks import shortest_road
@@ -31,7 +31,7 @@ def net_clustering_coefficient(hg: hnx.Hypergraph):
     node_num = matrix.shape[0]
     node_clustering = 0
     for i in range(node_num):
-        node_clustering = node_clustering + smalltest.node_clustering_coefficient(hg, i)
+        node_clustering = node_clustering + micro_statistics.node_clustering_coefficient(hg, i)
     net_clustering = node_clustering / node_num
     return net_clustering
 
@@ -47,7 +47,7 @@ def net_subgraph_centrality(hg: hnx.Hypergraph):
     node_num = matrix.shape[0]
     node_centrality = 0
     for i in range(node_num):
-        node_centrality = node_centrality + smalltest.Subgraph_centrality(hg, i)
+        node_centrality = node_centrality + micro_statistics.Subgraph_centrality(hg, i)
     net_centrality = node_centrality / node_num
     return net_centrality
 
@@ -87,7 +87,7 @@ def shannon_entropy(hg: hnx.Hypergraph):
     degree_matrix = np.zeros(shape=(node_num, node_num))
     # 首先要求度矩阵
     for i in range(node_num):
-        degree_matrix[i - 1, i - 1] = smalltest.hyperdegree(hg, i)
+        degree_matrix[i - 1, i - 1] = micro_statistics.hyperdegree(hg, i)
     # 创建拉普拉斯矩阵
     laplace_matrix = degree_matrix - matrix
     vals, vecs = sp.sparse.linalg.eigs(laplace_matrix)  # val特征值，vecs特征向量
@@ -177,7 +177,7 @@ def classification_entropy(hg: hnx.Hypergraph):
     for i in range(node_num):
         node_type = 0
         for j in range(node_num):
-            if smalltest.hyperdegree(hg, j) == i:
+            if micro_statistics.hyperdegree(hg, j) == i:
                 node_type = node_type + 1
         node_type_list.append(node_type / node_num)
     for k in range(node_num):
@@ -203,7 +203,7 @@ def hypernet_motif_entropy(hg: hnx.Hypergraph):
     for i in range(node_num):
         node_type = 0
         for j in range(node_num):
-            if smalltest.hyperdegree(hg, j) == i:
+            if micro_statistics.hyperdegree(hg, j) == i:
                 node_type = node_type + 1
         node_type_list.append(node_type / node_num)  # pi的列表
     for k in range(len(node_type_list)):
@@ -224,7 +224,7 @@ def hyperNet_centrality(hg: hnx.Hypergraph):
     centrality_list = []
     centrality_sum = 0
     for i in range(node_num):
-        centrality_list.append(smalltest.Subgraph_centrality(hg, i))
+        centrality_list.append(micro_statistics.Subgraph_centrality(hg, i))
     for j in range(node_num):
         centrality_sum = centrality_sum + (max(centrality_list) - centrality_list[j])
     centrality = centrality_sum / (node_num - 2)
