@@ -9,13 +9,14 @@ from Notebooks import meso_statistics
 from Notebooks import macro_statistics
 from Notebooks import shortest_road
 from Notebooks import hyperdraw
+from Notebooks import ER_network
 
 
 def hyperuse():
     Edges, Names, Weights = pickle.load(open("../Data/GoT.pkl", "rb"))
     # print(Edges, Names, Weights)
     HG = hnx.Hypergraph(dict(enumerate(Edges)))
-    print(HG)
+    ER_network.init_erNet()
     # 198node,1400+edges
     # smallEdges = []
     # for i in range(30):
