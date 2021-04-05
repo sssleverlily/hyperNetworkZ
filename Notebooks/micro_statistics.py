@@ -55,7 +55,7 @@ def Subgraph_centrality(hg: hnx.Hypergraph, node: int):
     martix = hg.adjacency_matrix().asfptype()  # 上投矩阵以浮动或翻倍
     vals, vecs = sp.sparse.linalg.eigs(martix)  # val特征值，vecs特征向量
     sub_centrality = 0
-    for i in range(6):
+    for i in range(len(vals)):
         sub_centrality = sub_centrality + vecs[node][i] * vecs[node][i] * math.exp(vals[i])
     return sub_centrality
 
