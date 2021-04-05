@@ -138,7 +138,7 @@ def node_clustering_coefficient(hg: hnx.Hypergraph, node: int):
         if (adjacency_matrix[node, i]) != 0:
             node_edge_shared = node_edge_shared + adjacency_matrix[node, i]
             node_direct_num = node_direct_num + 1
-    node_direct_num = (node_direct_num * (node_direct_num)) / 2
+    node_direct_num = (node_direct_num * (node_direct_num - 1)) / 2
     node_clustering = node_edge_shared / node_direct_num
     return node_clustering
 
