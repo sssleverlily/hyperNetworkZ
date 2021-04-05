@@ -72,25 +72,3 @@ def hyperedge_strength(hg: hnx.Hypergraph, edge_i: int):
     for j in range(size):
         node_num = node_num + matrix[edge_i, j]
     return node_num
-
-
-'''
-超边密度
-
-'''
-
-
-def hyperedge_density(hg: hnx.Hypergraph, edge: int):
-    matrix = hg.adjacency_matrix().todense()
-    size = matrix.shape[0]
-    node_list = []
-    for i in range(size):
-        node_num = 0
-        for j in range(size):
-            node_num = node_num + matrix[i, j]
-        node_list.append(node_num)
-    node_max = max(node_list)
-    node_min = min(node_list)
-    node = node_list[edge - 1]  # 因为第1个点是node_list[0]
-    hyperedge_density = (node_max - node) / (node_max - node_min)
-    return hyperedge_density

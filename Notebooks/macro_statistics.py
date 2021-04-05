@@ -135,7 +135,6 @@ def hyperNet_natural_connectivity(hg: hnx.Hypergraph):
     natural_connectivity = math.log(sum / node_num, math.e)
     return natural_connectivity
 
-
 '''
 空间中心性
 程度中心性  中间中心性 特征向量中心性

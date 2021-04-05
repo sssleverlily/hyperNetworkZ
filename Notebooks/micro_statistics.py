@@ -244,7 +244,7 @@ a,b,c 是调节参数，只要满足a+b+c=1即可
 
 
 def node_importance(hg: hnx.Hypergraph, node: int, a: int, b: int, c: int):
-    if a+b+c != 1:
+    if a + b + c != 1:
         print("输入参数错误")
         return 0
     else:
@@ -264,3 +264,25 @@ def node_importance(hg: hnx.Hypergraph, node: int, a: int, b: int, c: int):
         node_betweenness = node_betweenness_centrality(hg, node)
         node_importance = a * node_degree + b * node_star + c * node_betweenness
         return node_importance
+
+
+'''
+超边密度
+节点的连接，微观统计量
+'''
+
+
+def hyperedge_density(hg: hnx.Hypergraph, node: int):
+    matrix = hg.adjacency_matrix().todense()
+    size = matrix.shape[0]
+    node_list = []
+    for i in range(size):
+        node_num = 0
+        for j in range(size):
+            node_num = node_num + matrix[i, j]
+        node_list.append(node_num)
+    node_max = max(node_list)
+    node_min = min(node_list)
+    node = node_list[node - 1]  # 因为第1个点是node_list[0]
+    hyperedge_density = (node_max - node) / (node_max - node_min)
+    return hyperedge_density
