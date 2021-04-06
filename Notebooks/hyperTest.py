@@ -22,7 +22,6 @@ def hyperuse():
     # for i in range(30):
     #     smallEdges.append(Edges[i])
     # smallHG = hnx.Hypergraph(dict(enumerate(smallEdges)))
-
     # edges.element的形式 0: Entity(0,['0', '2'],{})
     # print(HG.edge_adjacency_matrix()) #边的邻接矩阵
     # print(HG.degree(str(HG.edges.elements.get(0).uid)))

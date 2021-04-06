@@ -24,7 +24,7 @@ def init_erNet():
     i = 0
     #str(random.randint(1, 7))
     #先创建边
-    for i in range(3):
+    for i in range(nodes_num.__len__()):
         edge = []
         for j in range(nodes_num[i]):
             edge.append(str(random.randint(1, 7)))
