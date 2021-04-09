@@ -25,7 +25,7 @@ def hyperdistribution(hg: hnx.Hypergraph, edge_degree_is_k: int):
     edges_Num = len(hg.edges)
     edge_Sum = 0
     for i in range(edges_Num):
-        if hg.degree(str(hg.edges.elements.get(i).uid)) == edge_degree_is_k:
+        if len(hg._edges.elements.get(i).elements) == edge_degree_is_k:
             edge_Sum = edge_Sum + 1
     distribution = edge_Sum / edges_Num
     return distribution
