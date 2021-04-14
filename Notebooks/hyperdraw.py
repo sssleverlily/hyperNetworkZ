@@ -79,6 +79,7 @@ def draw_node_degree(hg: hnx.Hypergraph):
     labels = []
     for i in range(length):
         # 添加
+        # 在这里可以变换想要统计的量，但我还没想好怎么改成可变的。目前只能写死了
         statistic_value.append(micro_statistics.hyperdegree(hg, i).real)
     # labels = ['G1', 'G2', 'G3', 'G4', 'G5']
     value_len = len(statistic_value)
@@ -98,5 +99,17 @@ def draw_node_degree(hg: hnx.Hypergraph):
     autolabel(rects1, ax)
 
     fig.tight_layout()
-
     plt.show()
+
+
+'''
+画网络结构图
+'''
+
+
+def hypergraphdraw(hg: hnx.Hypergraph):
+    hnx.draw(hg)
+    #在Notebooks文件夹下存一张filename的图片
+    plt.savefig("filename.png")
+    plt.show()
+    return
