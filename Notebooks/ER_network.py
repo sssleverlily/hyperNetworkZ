@@ -6,6 +6,7 @@ import hypernetx as hnx
 from Notebooks import micro_statistics
 from Notebooks import meso_statistics
 from Notebooks import macro_statistics
+from Notebooks import hyperdraw
 
 '''
 er图的意思就是随机连接
@@ -17,13 +18,14 @@ er图的意思就是随机连接
 [{'2', '0'}]
 '''
 
+
 def init_erNet():
-    #首先随机三个边
+    # 首先随机三个边
     edges = []
-    nodes_num = [3, 5, 2]
+    nodes_num = [3, 5, 2, 1, 4, 6, 6, 7, 4, 2, 3, 2, 4, 1, 2, 3, 4, 6, 7, 7, 8]
     i = 0
-    #str(random.randint(1, 7))
-    #先创建边
+    # str(random.randint(1, 7))
+    # 先创建边
     for i in range(nodes_num.__len__()):
         edge = []
         for j in range(nodes_num[i]):
@@ -31,8 +33,9 @@ def init_erNet():
         edges.append(edge)
     print(edges)
     HG = hnx.Hypergraph(dict(enumerate(edges)))
-    print(micro_statistics.degree_centrality(HG, 3))
-
+    hyperdraw.hypergraphdraw(HG)
+    hyperdraw.draw_node_degree(HG)
+    # print(micro_statistics.degree_centrality(HG, 3))
 
 # class ER_network:
 #     def __init__(self, N, p, title):
