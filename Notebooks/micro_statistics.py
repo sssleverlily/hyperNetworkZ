@@ -114,7 +114,7 @@ def cosine_degree(hg: hnx.Hypergraph, node: int):
     direct_node_sum = 0
     for i in range(size):
         if matrix[node, i] != 0:
-            degree_num = degree_num + hg.degree(str(node))
+            degree_num = degree_num + hyperdegree(hg, node)
             direct_node_sum = direct_node_sum + 1
     cos_degree = degree_num / direct_node_sum
     return cos_degree

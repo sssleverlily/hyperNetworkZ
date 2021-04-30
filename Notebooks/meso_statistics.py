@@ -16,7 +16,8 @@ def hyperedge_degree(hg: hnx.Hypergraph, edge: int):
     size = matrix.shape[1]
     edge_degree = 0
     for i in range(size):
-        edge_degree = edge_degree + matrix[i, edge]
+        # 之前是matrix[i, edge]
+        edge_degree = edge_degree + matrix[edge, i]
     return edge_degree
 
 
