@@ -37,6 +37,7 @@ def init_erNet():
     hyperdraw.draw_node_degree(HG)
     # print(micro_statistics.degree_centrality(HG, 3))
 
+
 # class ER_network:
 #     def __init__(self, N, p, title):
 #         self.num = N  # 初始时网络有 N 个节点
@@ -98,3 +99,27 @@ def init_erNet():
 #
 #
 #
+'''
+一阶零模型
+保证超度分布不变的零模型
+'''
+
+
+def one_order(hg: hnx.Hypergraph):
+    #随机生成超图
+    micro_statistics.hyperdistribution(hg, 3)
+    edges = hg.edges
+    nodes = hg.nodes
+    #节点交换矩阵
+    node_matrix = np.zeros((len(nodes), len(nodes)))
+    # print(edges)
+    for i in hg.nodes:
+        for j in hg.nodes:
+            print(j)
+            if micro_statistics.hyperdistribution(hg, micro_statistics.hyperdegree(hg, int(i))) \
+                    == micro_statistics.hyperdistribution(hg,micro_statistics.hyperdegree(hg, int(j))):
+                node_matrix[int(i)][int(j)] = 1 #代表可以交换
+    # print(edges)
+    # hnx.Hypergraph(dict(enumerate()))
+
+    return

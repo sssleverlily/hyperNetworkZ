@@ -110,6 +110,6 @@ def draw_node_degree(hg: hnx.Hypergraph):
 def hypergraphdraw(hg: hnx.Hypergraph):
     hnx.draw(hg)
     #在Notebooks文件夹下存一张filename的图片
-    plt.savefig("filename.png")
+    # plt.savefig("filename.png")
     plt.show()
     return

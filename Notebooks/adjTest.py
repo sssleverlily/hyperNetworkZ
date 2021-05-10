@@ -20,15 +20,18 @@ def init():
             break
     # for i in range(30):
     #     smallEdges.append(edges.get(i))
-    print(edges)
-    print(nodes)
-    HG = hnx.Hypergraph(dict(enumerate(smallEdges)))
+    # print(edges)
+    # print(nodes)
+    HG = hnx.Hypergraph(dict(enumerate(edges)))
+    # for i in range(len(nodes)):
+    #     print(micro_statistics.node_clustering_coefficient(HG, i))
+    print(macro_statistics.hypergraph_density(HG))
     # print(HG)
     # print(macro_statistics.hypergraph_density(HG))
     # print(micro_statistics.hyperdegree(HG, 5))
     # print(HG)
-    hnx.draw(HG)
-    plt.show()
+    # hnx.draw(HG)
+    # plt.show()
     return
 
 

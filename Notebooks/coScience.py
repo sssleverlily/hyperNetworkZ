@@ -1,12 +1,16 @@
 import hypernetx as hnx
 import networkx as nx
 from Notebooks import micro_statistics
+from Notebooks import macro_statistics
+from Notebooks import meso_statistics
 import matplotlib.pyplot as plt
 
 
 def init():
     net = nx.read_gml('/Users/ssslever/PycharmProjects/hyperNetworkZ/Data/netscience.gml')
     edges = net.edges._adjdict
+    edges_num = net.edges
+    nodes = net._node
     smallEdges = {}
     i = 0
     for i, (k, v) in enumerate(edges.items()):
@@ -14,14 +18,20 @@ def init():
         if i == 30:
             print()
             break
-    print(smallEdges)
-    print(edges)
     # for i in range(30):
     #     smallEdges.append(edges.get(i))
-    HG = hnx.Hypergraph(dict(enumerate(smallEdges)))
+    # print(len(edges_num))
+    # print(len(nodes))
+    HG = hnx.Hypergraph(dict(enumerate(edges)))
+    # for i in range(len(nodes)):
+    #     print(micro_statistics.node_clustering_coefficient(HG, i))
+    print(macro_statistics.hypergraph_density(HG))
     # print(HG)
-    hnx.draw(HG)
-    plt.show()
+    # print(macro_statistics.hypergraph_density(HG))
+    # print(micro_statistics.hyperdegree(HG, 5))
+    # print(HG)
+    # hnx.draw(HG)
+    # plt.show()
     return
 
 
