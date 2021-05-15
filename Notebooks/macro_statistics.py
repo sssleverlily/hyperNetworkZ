@@ -94,7 +94,7 @@ def shannon_entropy(hg: hnx.Hypergraph):
     vals_sum = 0
     for i in range(len(vals)):
         vals_sum = vals_sum + math.fabs(vals[i]) * math.log2(math.fabs(vals[i]))
-    return -1 * vals_sum
+    return vals_sum
 
 
 '''
@@ -207,9 +207,9 @@ def hypernet_motif_entropy(hg: hnx.Hypergraph):
         node_type_list.append(node_type / node_num)  # pi的列表
     for k in range(len(node_type_list)):
         p_i = p_i + node_type_list[k]
-    print(p_i)
+    # print(p_i)
     # n-模体熵
-    return
+    return p_i
 
 
 '''

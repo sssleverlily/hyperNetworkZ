@@ -3,6 +3,7 @@ import networkx as nx
 from Notebooks import micro_statistics
 from Notebooks import macro_statistics
 from Notebooks import meso_statistics
+from Notebooks import ER_network
 import matplotlib.pyplot as plt
 
 
@@ -22,10 +23,10 @@ def init():
     #     smallEdges.append(edges.get(i))
     # print(len(edges_num))
     # print(len(nodes))
-    HG = hnx.Hypergraph(dict(enumerate(edges)))
+    HG = hnx.Hypergraph(dict(enumerate(smallEdges)))
     # for i in range(len(nodes)):
     #     print(micro_statistics.node_clustering_coefficient(HG, i))
-    print(macro_statistics.hypergraph_density(HG))
+    ER_network.one_order(HG)
     # print(HG)
     # print(macro_statistics.hypergraph_density(HG))
     # print(micro_statistics.hyperdegree(HG, 5))

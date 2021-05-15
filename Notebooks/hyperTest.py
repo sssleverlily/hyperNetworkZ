@@ -29,7 +29,7 @@ def hyperuse():
     # print(HG.edge_adjacency_matrix()) #边的邻接矩阵
     # print(HG.degree(str(HG.edges.elements.get(0).uid)))
     # print(HG.degree('0'))
-    ER_network.one_order(smallHG)
+
 
 
 # 198node 1491edge
