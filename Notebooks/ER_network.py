@@ -139,21 +139,28 @@ def cal_srp(hx: hnx.Hypergraph):
     summ = [0.0]*6
     for i in range(6):
         null_models.append(init_erNet())
-    Nrandi = [0.0]*6
+    Nrandi = np.zeros((6, 6), dtype=np.float64)
     Nreal = [0.0]*6
+    aver = [0.0]*6
     delta_i = [0.0]*6
     sum_delta = 0
     srp_i = [0.0]*6
     #计算部分
     for i in range(6):
         summ[0] = summ[0] + macro_statistics.net_clustering_coefficient(null_models[i])
+        Nrandi[0][i] = macro_statistics.net_clustering_coefficient(null_models[i])
         # summ[1] = summ[1] + macro_statistics.net_subgraph_centrality(null_models[i])
         summ[1] = summ[1] + macro_statistics.average_shortest_path(null_models[i])
+        Nrandi[1][i] = macro_statistics.average_shortest_path(null_models[i])
         summ[2] = summ[2] + macro_statistics.shannon_entropy(null_models[i])
+        Nrandi[2][i] = macro_statistics.shannon_entropy(null_models[i])
         summ[3] = summ[3] + macro_statistics.hyperNet_efficiency(null_models[i])
+        Nrandi[3][i] = macro_statistics.hyperNet_efficiency(null_models[i])
         # summ[5] = summ[5] + macro_statistics.hyperNet_natural_connectivity(null_models[i])
         summ[4] = summ[4] + macro_statistics.classification_entropy(null_models[i])
+        Nrandi[4][i] = macro_statistics.classification_entropy(null_models[i])
         summ[5] = summ[5] + macro_statistics.hypernet_motif_entropy(null_models[i])
+        Nrandi[5][i] = macro_statistics.hypernet_motif_entropy(null_models[i])
         # summ[8] = summ[8] + macro_statistics.hyperNet_centrality(null_models[i])
 
     Nreal[0] = macro_statistics.net_clustering_coefficient(hx)
@@ -165,13 +172,16 @@ def cal_srp(hx: hnx.Hypergraph):
     Nreal[4] = macro_statistics.classification_entropy(hx)
     Nreal[5] = macro_statistics.hypernet_motif_entropy(hx)
     # Nreal[8] = macro_statistics.hyperNet_centrality(hx)
-
+    '''
+    Nrandi[][] 每一行代表一个统计量 [1][i]
+    '''
     for i in range(6):
-        Nrandi[i] = summ[i] / 6
-        delta_i[i] = (Nreal[i]-Nrandi[i])/(Nreal[i]+Nrandi[i])
+        aver[i] = summ[i] / 6
+        delta_i[i] = (Nreal[i]-aver[i])/(np.std(Nrandi[i], ddof=1))
     for i in range(6):
         sum_delta = sum_delta + delta_i[i]*delta_i[i]
     for i in range(6):
+
         srp_i[i] = delta_i[i]/math.sqrt(sum_delta)
         print(srp_i[i])
     return
