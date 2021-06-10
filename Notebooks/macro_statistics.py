@@ -32,6 +32,7 @@ def net_clustering_coefficient(hg: hnx.Hypergraph):
     node_clustering = 0
     for i in range(node_num):
         node_clustering = node_clustering + micro_statistics.node_clustering_coefficient(hg, i)
+        print(node_clustering)
     net_clustering = node_clustering / node_num
     return net_clustering
 
